@@ -51,6 +51,8 @@ app.post('/verifyOtp', async (req, res) => {
 
 app.post('/login', async (req, res) => {
     try {
+        
+        console.log("Login Request1 : ", req);
         console.log("Login Request : ", req.body);
         const data = await login(req.body);  
 
