@@ -11,8 +11,8 @@ async function checkUser(req) {
         const db = client.db(database);
         const collection = db.collection(collectionName);
 
-        let email = req.email.toLowerCase();
-        let password = req.password.toLowerCase();
+        let email = req.email;
+        let password = req.password;
         
         let data = await collection.findOne({
             "email" : email
@@ -20,7 +20,7 @@ async function checkUser(req) {
 
         if (data) {
 
-            if(password == data.password.toLowerCase()){
+            if(password == data.password){
                 return{
                     statusCode : 200,
                     body : "Login Sucess"
