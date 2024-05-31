@@ -1,4 +1,5 @@
 const express = require('express');
+const bodyParser = require('body-parser');
 const app = express();
 
 const signUp = require('./signUp/index');
@@ -18,10 +19,13 @@ const allLibrary = require('./Liibrary/all_library');
 const addLibrary = require('./Liibrary/add_library');
 const getLibrary = require('./Liibrary/particular_library');
 
-
 const port = 3000;
 
-app.use(express.json());
+// Middleware for parsing application/json
+app.use(bodyParser.json());
+
+// Middleware for parsing application/x-www-form-urlencoded
+app.use(bodyParser.urlencoded({ extended: true }));
 
 app.post('/signUp', async (req, res) => {
     try {
