@@ -1,5 +1,11 @@
 const express = require('express');
 const app = express();
+
+const signUp = require('./signUp/index');
+const login = require('./login/userLogin');
+const verify = require('./verifyOtp/index');
+const userProfile = require('./userProfile/profile');
+
 const allMesh = require("./Mesh/all_mesh");
 const addMesh = require('./Mesh/add_mesh');
 const getMesh = require('./Mesh/particular_mesh');
@@ -16,6 +22,50 @@ const getLibrary = require('./Liibrary/particular_library');
 const port = 3000;
 
 app.use(express.json());
+
+app.post('/signUp', async (req, res) => {
+    try {
+        console.log(req.body); // Access request body using req.body
+        const data = await signUp(req.body);
+
+        res.status(data.statusCode).json(data.body);
+    } catch (e) {
+        res.status(500).send({ body: e.message });
+    } 
+});
+
+app.post('/verifyOtp', async (req, res) => {
+    try {
+        console.log("Verify Request : ", req.body);
+        const data = await verify(req.body);  
+
+        res.status(data.statusCode).json(data.body); 
+    } catch (e) {
+        res.status(500).send({ body: e.message });
+    }
+}); 
+
+app.post('/login', async (req, res) => {
+    try {
+        console.log("Login Request : ", req.body);
+        const data = await login(req.body);  
+
+        res.status(data.statusCode).json(data.body); 
+    } catch (e) {
+        res.status(500).send({ body: e.message });
+    }
+}); 
+
+app.post('/userProfile', async (req, res) => {
+    try {
+        const data = await userProfile(req.body);  
+
+        res.status(data.statusCode).json(data.body); 
+    } catch (e) {
+        res.status(500).send({ body: e.message });
+    }
+}); 
+
 
 app.get('/getMesh', async(req,res) =>{
     try{
