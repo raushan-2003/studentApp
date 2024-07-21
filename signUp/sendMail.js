@@ -19,7 +19,7 @@ async function sendMail(name,email,otp) {
 
         const capitalizedName = name.charAt(0).toUpperCase() + name.slice(1);
         const mailOptions = {
-            from: `Raushan Singh<${userMail}>`, // Sender email address
+            from: `Janki Kumari <iamjankikumari123@gmail.com>`, // Sender email address
             to: email, // Recipient email address
             subject: 'Email Verification OTP', // Email subject
             html: `<div style="font-family: Arial, sans-serif; padding: 20px; border-radius: 10px; background-color: #f4f4f4;">

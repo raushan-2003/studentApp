@@ -34,7 +34,7 @@ async function checkUser(req) {
         throw error;
     } finally {
         if (client) {
-            console.log("Monogo Connection closing");
+            console.log("Monogo Connection closing 11 ");
             await client.close();
             console.log("Monogo Collection close");
         }

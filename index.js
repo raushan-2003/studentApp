@@ -19,6 +19,9 @@ const allLibrary = require('./Liibrary/all_library');
 const addLibrary = require('./Liibrary/add_library');
 const getLibrary = require('./Liibrary/particular_library');
 
+
+const updateUserProfile = require('./profileUpdate/user_profile_update');
+
 const port = 3000;
 
 // Middleware for parsing application/json
@@ -71,6 +74,19 @@ app.post('/userProfile', async (req, res) => {
         res.status(500).send({ body: e.message });
     }
 }); 
+
+app.post('/user_profile_update', async(req,res) =>{
+    try{
+        console.log("Request Body : ",req.body);
+        let profileData = await updateUserProfile(req.body);
+        console.log("Return Response : ",profileData);
+        res.status(profileData.statusCode).json(profileData.body);
+
+    }catch(e){
+        res.status(500).json(e.message);
+    }
+
+})
 
 
 app.get('/getMesh', async(req,res) =>{
